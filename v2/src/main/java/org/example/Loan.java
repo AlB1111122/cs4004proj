@@ -27,6 +27,22 @@ public class Loan{
         returned = false;
         book.setAvailble(false);
     }
+    
+    Reservation(Book book, Person reservedTo)throws RuntimeException{
+        if(!book.getAvailble()){
+            throw new RuntimeException("That book is already out on loan");//dosnt let u take out a book thats already out
+        }
+        this.book = book;
+        this.reservedTo = reservedTo;
+        dateTaken = LocalDate();
+        dateReturned = null;//not returned
+        overTime = false;//not overtime
+        dueDate = dateTaken.plusWeeks(3);//3 week reservation
+        returned = false;
+        if LocalDate.now =  dateTaken.plusWeeks(3) {
+            book.setAvailble(false);
+        }
+    }
 
     public Book getBook(){
         return book;
@@ -34,6 +50,10 @@ public class Loan{
 
     public Person getLoanedTo(){
         return loanedTo;
+    }
+    
+     public Person getReservedTo(){
+        return reservedTo;
     }
 
     public LocalDate getDateTaken(){
