@@ -143,19 +143,23 @@ public class LiberaryMenu{
             System.out.println("Enter the books title: (if you enter nothing all titles will be included in results)");
             String inputTitle = in.nextLine();
             if(!inputTitle.equals("")) {
-                results.removeIf(b -> !b.getAuthor().contains(inputTitle));
+                results.removeIf(b -> !b.getTitle().toLowerCase().contains(inputTitle.toLowerCase()));
                 if(results.isEmpty()){
                     System.out.println("No relevant books found");
                     break;
                 }
             }
-            for(Book b:results){
-                System.out.println(b.toString() + " Avalible for reservation/loan:" + b.getAvailble());
-                //put in loan/reserve/read method
-            }
+            searchResultsPage(results,sys);
         }
 
 
+    }
+
+    public void searchResultsPage(ArrayList<Book> results, LiberarySystem sys){
+        int i = 1;
+        for(Book b:results){
+           System.out.println(i+") "+b.toString() + "Avalible for reservation/loan:" + b.getAvailble());
+        }
     }
 
 
