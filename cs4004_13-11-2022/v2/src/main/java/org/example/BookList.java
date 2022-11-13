@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BookList{
-    private String listName;
-
     private ArrayList<String> departments = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList();
 
@@ -65,6 +63,6 @@ public class BookList{
     }
 
     public String infoString(){
-        return String.format("List name: %s\nDepartments: %s\n",listName,getDepartmentString());
+        return String.format("Departments: %s\n",getDepartmentString());
     }
 }

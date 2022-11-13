@@ -44,6 +44,8 @@ public class Person{
         loans.remove(loan);
     }
 
+
+
     public boolean isStaff(){
         return staff;
     }

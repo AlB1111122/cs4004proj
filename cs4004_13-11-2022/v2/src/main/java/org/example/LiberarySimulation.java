@@ -33,6 +33,7 @@ public class LiberarySimulation{
         sys.addBook(b4);
         sys.addBook(b5);
         sys.addBook(b6);
+
         LiberaryMenu menu = new LiberaryMenu();
         menu.run(sys);
     }
