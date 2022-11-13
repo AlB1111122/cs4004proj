@@ -36,7 +36,30 @@ public class Person{
 
     public void removeLoan(Loan loan){
         loans.remove(loan);
+        
+        
+         public void addReservation(Loan reservation){
+        for(Loan l:loans){
+            if(l.toString().matches(loan.toString())){//cant take out 2 reserves on the same book
+                return;
+            }
+        }
+        String loanNameEmail = loan.getLoanedTo().getName() + loan.getLoanedTo().getEmail();
+        String perNameEmail = name + email;
+        Date dateTaken;
+        Date dateReturned;
+        if(!loanNameEmail.equals(perNameEmail ){
+            throw new RuntimeException("Cannot add this loan; was not taken out by this person");//cant take out a loan by another person(name + email togrther are unique)
+        }
+        loans.add(reservation);
+
+        //reservations are treated as loans with an offset date
     }
+
+    public void removeReservation(Loan reservation){
+        loans.remove(reservation);
+    }
+    
 
     public String getName(){
         return name;
