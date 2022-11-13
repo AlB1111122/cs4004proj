@@ -115,9 +115,9 @@ public class LiberaryMenu{
             ArrayList<Book> removing = new ArrayList<>();
             if(!dateMin.equals("")) {
                 for(Book b:results){
-                    if(sys.dateHander(dateMin) < 0){
+                    if(sys.dateHander(dateMin,b.getReleaseDate()) < 0){
                         more = false;
-                    }else if(sys.dateHander(b.getReleaseDate()) < sys.dateHander(dateMin)){
+                    }else if(sys.dateHander(dateMin,b.getReleaseDate()) > 0){
                         removing.add(b);
                     }
                 }
@@ -133,24 +133,33 @@ public class LiberaryMenu{
             String dateMax = in.nextLine();
             if(!dateMax.equals("")) {
                 for(Book b:results){
-                    if(sys.dateHander(dateMax) < 0){
-                        break;
-                    }if(sys.dateHander(b.getReleaseDate()) > sys.dateHander(dateMax)){
-                        results.remove(b);
-                        if(results.isEmpty()){
-                            System.out.println("No relevant books found");
-                            break;
-                        }
+                    if(sys.dateHander(dateMax,b.getReleaseDate()) < 0){
+                        more = false;
+                    }else if(sys.dateHander(b.getReleaseDate(),dateMax) > 0){
+                        removing.add(b);
                     }
                 }
             }
-            for(Book b:results){
-                System.out.println(b.toString() + " Avalible for reservation/loan:" + b.getAvailble());
-                //put in loan/reserve/read method
+            System.out.println("Enter the books title: (if you enter nothing all titles will be included in results)");
+            String inputTitle = in.nextLine();
+            if(!inputTitle.equals("")) {
+                results.removeIf(b -> !b.getTitle().toLowerCase().contains(inputTitle.toLowerCase()));
+                if(results.isEmpty()){
+                    System.out.println("No relevant books found");
+                    break;
+                }
             }
+            searchResultsPage(results,sys);
         }
 
 
+    }
+
+    public void searchResultsPage(ArrayList<Book> results, LiberarySystem sys){
+        int i = 1;
+        for(Book b:results){
+           System.out.println(i+") "+b.toString() + "Avalible for reservation/loan:" + b.getAvailble());
+        }
     }
 
 

@@ -33,7 +33,7 @@ public class LiberarySimulation{
         sys.addBook(b4);
         sys.addBook(b5);
         sys.addBook(b6);
-
+        sys.dateHander("20/06/2022","20/06/2021");
         LiberaryMenu menu = new LiberaryMenu();
         menu.run(sys);
     }
