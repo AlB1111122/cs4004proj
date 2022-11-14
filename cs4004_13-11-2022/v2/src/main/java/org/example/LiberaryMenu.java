@@ -157,7 +157,7 @@ public class LiberaryMenu{
         int i = 1;
         boolean more = true;
         boolean blocker = true;
-        Book selected;
+        Book selected = null;
         while(more) {
             while (blocker) {
                 System.out.println("0)Return to search page. Please select a book");
@@ -180,12 +180,12 @@ public class LiberaryMenu{
             }
             blocker = true;
             while(blocker) {
-                String optionsForBook = String.format("0)Return to results page. 1)%s. 2)");
+                System.out.print(selected);
+                String optionsForBook = String.format("0)Return to results page. %s",sys.getBookOps(selected));
                 String bookOpSel = in.nextLine();
                 if(bookOpSel.equals("0")){
                     blocker = false;
                 }
-
             }
 
         }

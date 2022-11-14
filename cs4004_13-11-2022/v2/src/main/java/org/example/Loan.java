@@ -26,6 +26,7 @@ public class Loan{
         dueDate = dateTaken.plusWeeks(3);//3 week loan
         returned = false;
         book.setAvailble(false);
+        book.setUnavalibleUntil(dueDate);
     }
 
     public Book getBook(){
@@ -76,6 +77,10 @@ public class Loan{
     public boolean getIfLate(){
         getReturnStatus();
         return overTime;
+    }
+
+    public LocalDate getDueDate(){
+      return dueDate;
     }
 
     public String toString(){

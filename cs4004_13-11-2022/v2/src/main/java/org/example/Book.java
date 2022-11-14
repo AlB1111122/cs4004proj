@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -12,6 +13,8 @@ public class Book{
     private String publisher;
 
     private boolean availble;
+
+    private LocalDate unavalibleUntil;
     private ArrayList<String> departments = new ArrayList<>();
 
     Book(String author, String releaseDate, String title, String edition, String publisher){
@@ -120,6 +123,14 @@ public class Book{
 
     public void setAvailble(boolean boo){
         availble = boo;
+    }
+
+    public LocalDate getUnavalibleUntil() {
+        return unavalibleUntil;
+    }
+
+    public void setUnavalibleUntil(LocalDate unavalibleUntil) {
+        this.unavalibleUntil = unavalibleUntil;
     }
 
     public String toString(){

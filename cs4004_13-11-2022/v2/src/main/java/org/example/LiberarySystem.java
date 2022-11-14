@@ -90,6 +90,16 @@ public class LiberarySystem{
         }
     }
 
+    public String getBookOps(Book book){//need to add ebook boolean
+        //if(book.isEbook()){
+         //   return "1)Read ebook online. 2)Download ebook";
+        //}
+        if(!book.getAvailble()){
+            return String.format("This book is unavailable for loan untill %s",book);
+        }
+        return "placeholder";
+    }
+
 
 
 }
