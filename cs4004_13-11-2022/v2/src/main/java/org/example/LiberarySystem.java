@@ -94,10 +94,22 @@ public class LiberarySystem{
         //if(book.isEbook()){
          //   return "1)Read ebook online. 2)Download ebook";
         //}
-        if(!book.getAvailble()){
-            return String.format("This book is unavailable for loan untill %s",book);
+        for(String s: book.getDepartments()){
+            if(signedIn.getDepartments().contains(s)){
+                if(!book.getAvailble()){
+                    return String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",book.getUnavalibleUntil());
+                }
+
+                if(!(signedIn.getLoans().isEmpty())){
+                    Loan temp = signedIn.getLoans().get(signedIn.getLoans().size() - 1);
+                    if(temp.getReturnStatus()) {
+                        return String.format("You must return your loan %s,\n to take out another loan", temp.toString());
+                    }
+                }
+                return "1)Loan book.";
+            }
         }
-        return "placeholder";
+        return "This book is not in your department";
     }
 
 

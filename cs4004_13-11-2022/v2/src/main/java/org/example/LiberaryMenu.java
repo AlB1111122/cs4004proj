@@ -172,7 +172,6 @@ public class LiberaryMenu{
                 }
                 try {
                     selected = results.get(Integer.parseInt(input) - 1);
-                    System.out.println(selected);
                     blocker = false;
                 } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                     System.out.println("not a valid input, please try again");
@@ -181,9 +180,27 @@ public class LiberaryMenu{
             blocker = true;
             while(blocker) {
                 System.out.print(selected);
-                String optionsForBook = String.format("0)Return to results page. %s",sys.getBookOps(selected));
+                System.out.println( String.format("0)Return to results page. %s",sys.getBookOps(selected)));
                 String bookOpSel = in.nextLine();
                 if(bookOpSel.equals("0")){
+                    blocker = false;
+                }
+                if(bookOpSel.equals("1")){
+                    if(!selected.getAvailble()){
+                        //sys.getSignedIn().addLoan(new Reservation(selected,sys.getSignedIn(),selected.getUnavalibleUntil()));
+                    }else if(!(sys.getBookOps(selected).contains("You must return your outstanding on"))){
+                        sys.getSignedIn().addLoan(new Loan(selected,sys.getSignedIn()));
+                        System.out.print("You now may take this book");
+                    }
+                    //if(selected.isEbook()){
+                    //    System.out.print("~~wow use your imagination for the books content~~~");
+                    //}
+                }else if(bookOpSel.equals("2")){
+                    //if(selected.isEbook()){
+                   //     System.out.print("~~wow look how downloaded that book is~~~");
+                   // }
+                }else{
+                    System.out.println("invalid input");
                     blocker = false;
                 }
             }

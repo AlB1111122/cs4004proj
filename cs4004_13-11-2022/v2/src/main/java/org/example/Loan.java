@@ -37,6 +37,10 @@ public class Loan{
         return loanedTo;
     }
 
+    public void setDateTaken(LocalDate dateTaken){
+        this.dateTaken = dateTaken;
+    }
+
     public LocalDate getDateTaken(){
         return dateTaken;
     }
@@ -77,6 +81,10 @@ public class Loan{
     public boolean getIfLate(){
         getReturnStatus();
         return overTime;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public LocalDate getDueDate(){
