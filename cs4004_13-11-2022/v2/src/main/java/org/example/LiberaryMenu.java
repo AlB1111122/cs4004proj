@@ -80,9 +80,7 @@ public class LiberaryMenu{
                 String input = in.nextLine();
                 results.clear();
                 if (input.equals("0")) {
-                    more = false;
                     homePage(sys);
-                    return;
                 }else if (input.equals("1")) {
                     results = sys.getBookList(sys.getSignedIn().getDepartmentString());
                     if(results.isEmpty()){
@@ -148,7 +146,7 @@ public class LiberaryMenu{
                     System.out.println("No relevant books found");
                     break;
                 }
-            }
+            }//need to add more serch terms
             searchResultsPage(results,sys);
         }
 
@@ -157,9 +155,42 @@ public class LiberaryMenu{
 
     public void searchResultsPage(ArrayList<Book> results, LiberarySystem sys){
         int i = 1;
-        for(Book b:results){
-           System.out.println(i+") "+b.toString() + "Avalible for reservation/loan:" + b.getAvailble());
+        boolean more = true;
+        boolean blocker = true;
+        Book selected;
+        while(more) {
+            while (blocker) {
+                System.out.println("0)Return to search page. Please select a book");
+                for (Book b : results) {
+                    System.out.println(i + ") " + b.toString());
+                    i++;
+                }
+                i = 1;
+                String input = in.nextLine();
+                if(input.equals("0")){
+                    return;
+                }
+                try {
+                    selected = results.get(Integer.parseInt(input) - 1);
+                    System.out.println(selected);
+                    blocker = false;
+                } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                    System.out.println("not a valid input, please try again");
+                }
+            }
+            blocker = true;
+            while(blocker) {
+                String optionsForBook = String.format("0)Return to results page");
+                String bookOpSel = in.nextLine();
+                if(bookOpSel.equals("0")){
+                    blocker = false;
+                }
+                
+            }
+
         }
+
+
     }
 
 
