@@ -102,8 +102,8 @@ public class LiberarySystem{
 
                 if(!(signedIn.getLoans().isEmpty())){
                     Loan temp = signedIn.getLoans().get(signedIn.getLoans().size() - 1);
-                    if(temp.getReturnStatus()) {
-                        return String.format("You must return your loan %s,\n to take out another loan", temp.toString());
+                    if(!(temp.getReturnStatus())) {
+                        return String.format("You must return %s,\n to take out another loan", temp.toString());
                     }
                 }
                 return "1)Loan book.";
