@@ -1,4 +1,4 @@
- 
+package org.example;
 
 import java.time.LocalDate;
 
@@ -7,9 +7,6 @@ public class Loan{
     private LocalDate dateTaken;
     private LocalDate dateReturned;
     private Person loanedTo;
-    private boolean reservation;
-    private int reserveDateOffset;
-    
 
     private boolean returned;
 
@@ -29,16 +26,7 @@ public class Loan{
         dueDate = dateTaken.plusWeeks(3);//3 week loan
         returned = false;
         book.setAvailble(false);
-        this.reserveDateOffset = 0;
-        
-        if (reservation = true && reserveDateOffset != 0 ) {
-            LocalDate today = LocalDate.now();
-            LocalDate reserveDate =  today.plusDays(reserveDateOffset);
-            dateTaken = reserveDate;
-        
-        }
     }
-    
 
     public Book getBook(){
         return book;
@@ -47,8 +35,7 @@ public class Loan{
     public Person getLoanedTo(){
         return loanedTo;
     }
-  
- 
+
     public LocalDate getDateTaken(){
         return dateTaken;
     }

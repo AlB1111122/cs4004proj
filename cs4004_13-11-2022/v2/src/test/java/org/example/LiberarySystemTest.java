@@ -56,7 +56,20 @@ public class LiberarySystemTest{
         assertThrows(RuntimeException.class, () -> sys.getPerson("3"));
         assertThrows(RuntimeException.class, () -> sys.getPerson("a"));
         assertThrows(RuntimeException.class, () -> sys.getPerson("a1"));
+    }
 
+    @Test
+    public void testDateHader(){
+        LiberarySystem sys = new LiberarySystem();
+        assertEquals(1,sys.dateHander("20/06/2022","20/06/2021"));
+        assertEquals(1,sys.dateHander("20/06/2022","01/05/2022"));
+        assertEquals(1,sys.dateHander("20/06/2022","19/06/2022"));
+
+        assertEquals(1,sys.dateHander("20/06/2022","20/06/2022"));
+
+        assertEquals(0,sys.dateHander("20/06/2022","20/06/2023"));
+        assertEquals(0,sys.dateHander("20/06/2022","20/07/2022"));
+        assertEquals(0,sys.dateHander("20/06/2022","21/06/2022"));
     }
 
 

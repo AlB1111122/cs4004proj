@@ -29,35 +29,17 @@ public class LiberarySystem{
                 break;
             }
             for (String s : b.getDepartments()) {
-                for (String retS : ret.getDepartments()) {
-                    if (s.equalsIgnoreCase(retS)) {
-                        ret.addBook(b);
-                    }
-                }
+               if(ret.getDepartments().contains(s)){
+                   ret.addBook(b);
+                   break;
+               }
+            }
+            if(b.getDepartments().isEmpty()){
+             ret.addBook(b);
             }
         }
         return ret.getBookList();
     }
-            /*
-        for(String retDep:ret.getDepartments()){
-            for(Book b: masterList.getBookList()){
-                if(ret.getBookList().contains(b)){
-                    break;
-                }
-                if(b.getDepartments().isEmpty()){
-                    ret.addBook(b);
-                }else{
-                    for(String bookDep : b.getDepartments()) {
-                        if (retDep.equalsIgnoreCase(bookDep)) {
-                            ret.addBook(b);
-                            break;
-                        }
-                    }
-                }
-            }*/
-        //}
-        //return ret.getBookList();
-    //}
 
     public Person getPerson(String userID){
         if(userID.matches(".*[a-zA-Z].*") || !(userID.matches(".*[0-9].*"))){
@@ -89,22 +71,23 @@ public class LiberarySystem{
         people.add(person);
     }
 
-    public int dateHander(String date){
-        if(date.matches("[a-zA-Z]") || !date.matches(".*[0-9].*")){
-            System.out.println("Bad search: not a valid date");
+    public int dateHander(String date1, String date2){
+        String[] d2 = date2.split("/");
+        if(date1.matches("[a-zA-Z]") || !date1.matches(".*[0-9].*")){
             return -1;
         }
-        String[] dateChop = date.split("/");
-        if(!(dateChop.length - 3 == 0)){
-            System.out.println("Bad search: not a valid date");
+        String[] in = date1.split("/");
+        if(!(in.length - 3 == 0)){
             return -1;
         }
-        if(!(dateChop[0].length() - 2 == 0) || !(dateChop[1].length() - 2 == 0) || !(dateChop[2].length() - 4 == 0)){
-            System.out.println("Bad search: not a valid date");
+        if(!(in[0].length() - 2 == 0) || !(in[1].length() - 2 == 0) || !(in[2].length() - 4 == 0)){
             return -1;
         }
-        int[] daysOfMonth = {13,28,31,30,31,30,31,31,30,31,30,31};
-        return Integer.parseInt(dateChop[0]) + daysOfMonth[Integer.parseInt(dateChop[1]) - 1] + (365 * Integer.parseInt(dateChop[2]));
+        if(Integer.parseInt(in[0] + in[1] + in[2]) >= Integer.parseInt(d2[0] + d2[1] + d2[2])){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 
