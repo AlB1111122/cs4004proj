@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class LiberarySystem{
@@ -25,6 +26,9 @@ public class LiberarySystem{
     public ArrayList<Book> getBookList(String departments) {//changed bc the other was broken
         BookList ret = new BookList(departments);
         for (Book b : masterList.getBookList()) {
+            if (ret.getBookList().contains(b)) {
+                break;
+            }
             for (String s : b.getDepartments()) {
                if(ret.getDepartments().contains(s)){
                    ret.addBook(b);
@@ -68,6 +72,30 @@ public class LiberarySystem{
         people.add(person);
     }
 
+    public void registerUser(String newIsStaff, String newName, String newEmail, String newDepartments, String newPassword, int newID){
+        boolean isStaff = false;
+
+        if(!(newIsStaff.matches("Y") || (newIsStaff.matches("N")))){
+            throw new RuntimeException("That input is invalid. Please enter 'Y/N'.");
+        }
+        if (newIsStaff.equals("Y")) {
+            isStaff = true;
+        }
+        if (newIsStaff.equals("N")) {
+            isStaff = false;
+        }
+
+        if(!newEmail.contains("@") || !newEmail.contains(".") || !newEmail.matches(".*[a-zA-Z].*")){//makes sure email is an email
+                throw new RuntimeException("Cannot add this email. That's not an email");
+            }
+
+
+        Person p = new Person(isStaff, newName, newEmail, newDepartments, newPassword, newID);
+        people.add(p);
+    }
+
+
+
     public int dateHander(String date1, String date2){
         String[] d2 = date2.split("/");
         if(date1.matches("[a-zA-Z]") || !date1.matches(".*[0-9].*")){
@@ -91,35 +119,12 @@ public class LiberarySystem{
         //if(book.isEbook()){
          //   return "1)Read ebook online. 2)Download ebook";
         //}
-        boolean av = book.getAvailble();
-        boolean depatmentCompatible = false;
-        boolean userEligable = true;
-        if(book.getDepartments().isEmpty()){
-            depatmentCompatible = true;
-        }else{
-            for(String s: book.getDepartments()){
-                if(signedIn.getDepartments().contains(s)){
-                    depatmentCompatible = true;
-                    break;
-                }
-            }
+        if(!book.getAvailble()){
+            return String.format("This book is unavailable for loan untill %s",book);
         }
-        if(!signedIn.getLoans().isEmpty()){
-            userEligable = signedIn.getLoans().get(signedIn.getLoans().size() - 1).getReturnStatus();
-        }
-        //returning parts
-        if(depatmentCompatible){
-            if(!userEligable){
-                return String.format("You must return %s,\n to take out another loan", signedIn.getLoans().get(signedIn.getLoans().size() - 1).getBook().getTitle());
-            }
-            if(av){
-                return "1)Loan book.";
-            }else{
-                return String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",book.getUnavalibleUntil());
-            }
-        }else{
-            return "This book is not in your department";
-        }
-
+        return "placeholder";
     }
+
+
+
 }

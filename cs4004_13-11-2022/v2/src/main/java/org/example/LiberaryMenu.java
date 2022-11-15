@@ -30,7 +30,20 @@ public class LiberaryMenu{
                 return;
             }
             if(singInU.equals("0")) {
-                //createNewUserPage(sys);
+                System.out.println("Are you a staff member? Y/N");
+                String newIsStaff = in.nextLine();
+                System.out.println("Enter name:");
+                String newName = in.nextLine();
+                System.out.println("Enter email:");
+                String newEmail = in.nextLine();
+                System.out.println("Enter departments:");
+                String newDepartments = in.nextLine();
+                System.out.println("Enter password:");
+                String newPassword = in.nextLine();
+                System.out.println("Enter new ID:");
+                int newID = Integer.parseInt(in.nextLine());
+
+                sys.registerUser(newIsStaff, newName, newEmail, newDepartments, newPassword, newID);
             }
             try {
                 sys.getPerson(singInU);
@@ -251,8 +264,8 @@ public class LiberaryMenu{
                     //}
                 }else if(bookOpSel.equals("2")){
                     //if(selected.isEbook()){
-                   //     System.out.println("~~wow look how downloaded that book is~~~");
-                   // }
+                    //     System.out.println("~~wow look how downloaded that book is~~~");
+                    // }
                 }else{
                     System.out.println("invalid input");
                     return;
@@ -268,7 +281,7 @@ public class LiberaryMenu{
             String input = "";
             while (blocker) {
                 System.out.println("0)Return home. 1)Staff in my department. 2)Search by name. 3)Search by department");
-                 input = in.nextLine();
+                input = in.nextLine();
                 if (!input.equals("")) {
                     blocker = false;
                 }
@@ -323,8 +336,8 @@ public class LiberaryMenu{
 }
 
 
-    //public void createNewUserPage(LiberarySystem sys){//this only lets you make student accounts staff accounts are added in the staff only page
-        //System.out.println();
-    //}
+//public void createNewUserPage(LiberarySystem sys){//this only lets you make student accounts staff accounts are added in the staff only page
+//System.out.println();
+//}
 
 
