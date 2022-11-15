@@ -19,9 +19,11 @@ public class Reservation extends Loan{
 
     public void setReservationDate(LocalDate reservationDate){
         this.reservationDate = reservationDate;
-
     }
 
+    public String toString(){
+        return String.format("Reservation: %s",super.toString());
+    }
 }
 
   

@@ -1,5 +1,6 @@
 package org.example;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class LiberaryMenu{
                 String newName = in.nextLine();
                 System.out.println("Enter email:");
                 String newEmail = in.nextLine();
-                System.out.println("Enter departments:");
+                System.out.println("Enter departments: (Separate each department with a comma and space e.g. a, b, c)");
                 String newDepartments = in.nextLine();
                 System.out.println("Enter password:");
                 String newPassword = in.nextLine();
@@ -77,19 +78,15 @@ public class LiberaryMenu{
                 }
                 if (menuMov.equals("0") && sys.getSignedIn().isStaff()) {
                     //staffOnlyPage(sys);
+                }else if (menuMov.equals("1")) {
+                    searchPage(sys);
+                }else if(menuMov.equals("2")){
+                    listStaffPage(sys);
+                }else if(menuMov.equals("3")){
+                    loanPage(sys);
+                }else{
+                    System.out.println("invalid input");
                 }
-                if (Integer.parseInt(menuMov) < 0 || Integer.parseInt(menuMov) > 3) {
-                    System.out.println("Thats not a valid input");
-                } else {
-                    blocker = false;
-                }
-            }
-            if (menuMov.equals("1")) {
-                searchPage(sys);
-            }else if(menuMov.equals("2")){
-                listStaffPage(sys);
-            }else if(menuMov.equals("3")){
-                loanPage(sys);
             }
         }
     }
@@ -326,10 +323,41 @@ public class LiberaryMenu{
     }
 
     public void loanPage(LiberarySystem sys){
-        for(Loan l:sys.getSignedIn().getLoans()){
-            System.out.println(l);
+        ArrayList<Loan> loans = sys.getSignedIn().getLoans();
+        String actions = "1)Return current loan";
+        if(!loans.isEmpty()){
+            for(Loan l:loans){
+                System.out.println(l);
+            }
+            Loan lastL = loans.get(loans.size() - 1);
+            if(!lastL.getReturnStatus()) {
+                if (lastL instanceof Reservation) {
+                    LocalDate temp = ((Reservation) lastL).getReservationDate().minusDays(1);
+                    if (!LocalDate.now().isAfter(temp)) {
+                        actions = "1)Cancel reservation";
+                    }
+                }
+            }else{
+                actions = "";
+            }
+            boolean blocker = true;
+            String input = "";
+            while(blocker){
+                System.out.printf("0)Return home. %s\n",actions);
+                input = in.nextLine();
+                if(input.equals("1") && actions.contains("1)")){
+                    lastL.returnBook();
+                    System.out.println("Book returned");
+                    blocker = false;
+                }else if(input.equals(("0"))){
+                    blocker = false;
+                }else{
+                    System.out.println("invalid input");
+                }
+            }
+        }else{
+            System.out.println("You have no loan history");
         }
-
         homePage(sys);
     }
 }

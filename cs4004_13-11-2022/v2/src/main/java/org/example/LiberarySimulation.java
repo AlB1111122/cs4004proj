@@ -18,6 +18,8 @@ public class LiberarySimulation{
     static Book b5 = new Book("a2", "01/03/2013", "Caluclus", "2", "pub1", "Mathematics & Statistics");
     static Book b6 = new Book("a2", "32/02/2004", "title5", "2", "pub2", "UL loan, Mathematics & Statistics");
 
+    static Loan l1 = new Loan(b1,p3);
+
 
     public static void main(String[] args)throws IOException{
         LiberarySystem sys = new LiberarySystem();
@@ -26,6 +28,8 @@ public class LiberarySimulation{
         sys.addPerson(p3);
         sys.addPerson(p4);
 
+        p3.addLoan(l1);
+
         sys.addBook(b1);
         sys.addBook(b2);
         sys.addBook(b3);
@@ -33,6 +37,7 @@ public class LiberarySimulation{
         sys.addBook(b4);
         sys.addBook(b5);
         sys.addBook(b6);
+
         LiberaryMenu menu = new LiberaryMenu();
         menu.run(sys);
     }
