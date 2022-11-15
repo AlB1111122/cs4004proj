@@ -72,6 +72,32 @@ public class LiberarySystemTest{
         assertEquals(0,sys.dateHander("20/06/2022","21/06/2022"));
     }
 
+    @Test
+    public void getBookOpsTest(){
+        LiberarySystem sys = new LiberarySystem();
+        sys.addPerson(p1);
+        sys.addPerson(p2);
+
+        sys.addBook(b1);
+        sys.addBook(b2);
+        sys.addBook(b3);
+        sys.addBook(b4);
+
+        sys.getPerson("1");
+        sys.signIn("password");
+
+        assertEquals("1)Loan book.",sys.getBookOps(b1));
+        Loan l1 = new Loan(b1,p1);
+        Loan l2 = new Loan(b2,p2);
+        sys.getSignedIn().addLoan(l1);
+        String str = String.format("You must return %s,\n to take out another loan",b1.getTitle());
+        assertEquals(str,sys.getBookOps(b1));
+        assertEquals("This book is not in your department",sys.getBookOps(b4));
+        l1.returnBook();
+        str = String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",b2.getUnavalibleUntil());
+        assertEquals(str,sys.getBookOps(b2));
+    }
+
 
 }
 

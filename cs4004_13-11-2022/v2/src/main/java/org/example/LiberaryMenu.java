@@ -74,7 +74,7 @@ public class LiberaryMenu{
             if (menuMov.equals("1")) {
                 searchPage(sys);
             }else if(menuMov.equals("2")){
-                staffPage(sys);
+                listStaffPage(sys);
             }else if(menuMov.equals("3")){
                 loanPage(sys);
             }
@@ -228,17 +228,23 @@ public class LiberaryMenu{
             blocker = true;
             while(blocker) {
                 System.out.println(selected);
-                System.out.printf("0)Return to results page. %s%n\n",sys.getBookOps(selected));
+                String mode = sys.getBookOps(selected);
+                System.out.printf("0)Return to results page. %s\n",mode);
                 String bookOpSel = in.nextLine();
                 if(bookOpSel.equals("0")){
                     blocker = false;
                 }
                 if(bookOpSel.equals("1")){
-                    if(!selected.getAvailble()){
-                        sys.getSignedIn().addLoan(new Reservation(selected,sys.getSignedIn(),selected.getUnavalibleUntil()));
-                    }else if(!(sys.getBookOps(selected).contains("You must return your outstanding on"))){
+                    if(mode.contains("1)Loan book.")){
                         sys.getSignedIn().addLoan(new Loan(selected,sys.getSignedIn()));
                         System.out.println("You now may take this book");
+                        break;
+                    } else if(mode.contains("This book is unavailable")){
+                        sys.getSignedIn().addLoan(new Reservation(selected,sys.getSignedIn(),selected.getUnavalibleUntil()));
+                        System.out.printf("Collect this book on %s\n",selected.getUnavalibleUntil());
+                        break;
+                    }else{
+                        break;
                     }
                     //if(selected.isEbook()){
                     //    System.out.println("~~wow use your imagination for the books content~~~");
@@ -247,18 +253,15 @@ public class LiberaryMenu{
                     //if(selected.isEbook()){
                    //     System.out.println("~~wow look how downloaded that book is~~~");
                    // }
-                }else if(bookOpSel.equals("0")){
-                    return;
-                } else{
+                }else{
                     System.out.println("invalid input");
                     return;
                 }
             }
-
         }
     }
 
-    public void staffPage(LiberarySystem sys){
+    public void listStaffPage(LiberarySystem sys){
         boolean more = true;
         boolean blocker = true;
         while(more) {

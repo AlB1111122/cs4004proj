@@ -91,21 +91,35 @@ public class LiberarySystem{
         //if(book.isEbook()){
          //   return "1)Read ebook online. 2)Download ebook";
         //}
-        for(String s: book.getDepartments()){
-            if(signedIn.getDepartments().contains(s)){
-                if(!book.getAvailble()){
-                    return String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",book.getUnavalibleUntil());
+        boolean av = book.getAvailble();
+        boolean depatmentCompatible = false;
+        boolean userEligable = true;
+        if(book.getDepartments().isEmpty()){
+            depatmentCompatible = true;
+        }else{
+            for(String s: book.getDepartments()){
+                if(signedIn.getDepartments().contains(s)){
+                    depatmentCompatible = true;
+                    break;
                 }
-
-                if(!(signedIn.getLoans().isEmpty())){
-                    Loan temp = signedIn.getLoans().get(signedIn.getLoans().size() - 1);
-                    if(!(temp.getReturnStatus())) {
-                        return String.format("You must return %s,\n to take out another loan", temp.toString());
-                    }
-                }
-                return "1)Loan book.";
             }
         }
-        return "This book is not in your department";
+        if(!signedIn.getLoans().isEmpty()){
+            userEligable = signedIn.getLoans().get(signedIn.getLoans().size() - 1).getReturnStatus();
+        }
+        //returning parts
+        if(depatmentCompatible){
+            if(!userEligable){
+                return String.format("You must return %s,\n to take out another loan", signedIn.getLoans().get(signedIn.getLoans().size() - 1).getBook().getTitle());
+            }
+            if(av){
+                return "1)Loan book.";
+            }else{
+                return String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",book.getUnavalibleUntil());
+            }
+        }else{
+            return "This book is not in your department";
+        }
+
     }
 }
