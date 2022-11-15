@@ -1,5 +1,8 @@
 cs4004proj
 
+bitbucket:(Were suposed to b using jira and bitbucket plz join through the emails)
+https://bitbucket.org/betacs4004/cs4004/src/main/
+
 jira:
 https://betacs4004.atlassian.net/jira/software/projects/CS4004BET/boards/1
 
