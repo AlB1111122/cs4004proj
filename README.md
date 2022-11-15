@@ -1,4 +1,8 @@
-# cs4004proj
+cs4004proj
+
+jira:
+https://betacs4004.atlassian.net/jira/software/projects/CS4004BET/boards/1
+
 general google doc:
 https://docs.google.com/document/d/1lcadF-_yyBLJxJSooe7MpaS6M5RLFPMe1pxesXLpolY/edit?usp=sharing
 
