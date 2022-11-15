@@ -90,6 +90,14 @@ public class LiberarySystem{
             }
 
 
+        for(Person p:people){
+                if (p.getEmail().equals(newEmail)) {
+                    System.out.println(p);
+                    break;
+                }
+
+        }
+
         Person p = new Person(isStaff, newName, newEmail, newDepartments, newPassword, newID);
         people.add(p);
     }
