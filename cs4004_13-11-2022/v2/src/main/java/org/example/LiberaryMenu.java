@@ -365,8 +365,44 @@ public class LiberaryMenu{
         boolean more = true;
         boolean blocker = true;
         while(more){
-            while(more){
-
+            while(blocker){
+                System.out.println("0)Return home. 1)Add book. 2)Remove book. 3)Remove person");
+                String input = in.nextLine();
+                if(input.equals("0")){
+                    more = false;
+                }else if(input.equals("1")){
+                    System.out.println("Enter the book information in the format: \n" +
+                            "AUTHOR, DD/MM/YYYY(release date), TITLE, EDITION, PUBLISHER, DEPARTMENT(S) SEPARATED BY ', '");
+                    String bookInfo = in.nextLine();
+                    System.out.println("Is this book an Ebook? Y/N");
+                    String ebook = in.nextLine();
+                    if(ebook.equalsIgnoreCase("Y")){
+                        sys.processNewBook(bookInfo,true);
+                    }else if(ebook.equalsIgnoreCase("N")){
+                        sys.processNewBook(bookInfo,false);
+                    }else{
+                        System.out.println("invalid input");
+                        break;
+                    }
+                }else if(input.equals("2")){
+                    //book search
+                }else if(input.equals("3")){
+                    System.out.println("Enter the ID number of the person you want to remove");
+                    String inputID = in.nextLine();
+                    if(inputID.matches(".*[a-zA-Z].*") || !inputID.matches(".*[0-9].*")){
+                        System.out.println("invalid input");
+                    }else{
+                        for(Person p: sys.getPeople()){
+                            if(p.getID() - Integer.parseInt(inputID) == 0){
+                                sys.getPeople().remove(p);
+                                System.out.println(p.getName() + " removed");
+                                break;
+                            }
+                        }
+                    }
+                }else{
+                    System.out.println("invalid input");
+                }
             }
         }
     }

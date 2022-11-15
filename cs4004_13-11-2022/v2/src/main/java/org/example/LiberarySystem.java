@@ -1,7 +1,9 @@
 package org.example;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 public class LiberarySystem{
     public static String in;
@@ -155,6 +157,54 @@ public class LiberarySystem{
             }
         }else{
             return "This book is not in your department";
+        }
+    }
+
+    public void processNewBook(String bookInfo, boolean ebook)throws RuntimeException {
+        int i = 0;
+        for (char c : bookInfo.toCharArray()) {
+            if (Objects.equals(c, ',')) {
+                i++;
+            }
+        }
+        if (i < 4) {
+            throw new RuntimeException("invalid input");
+        }
+        if (i - 4 == 0) {
+            String[] arr = new String[5];
+            arr = bookInfo.split(", ", 5);
+            if (ebook) {
+                try {
+                    Ebook book = new Ebook(arr[0], arr[1], arr[2], arr[3], arr[4]);
+                    masterList.addBook(book);
+                } catch (RuntimeException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+                try {
+                    Book book = new Book(arr[0], arr[1], arr[2], arr[3], arr[4]);
+                    masterList.addBook(book);
+                } catch (RuntimeException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        String[] arr = new String[6];
+        arr = bookInfo.split(", ", 6);
+        if (ebook) {
+            try {
+                Ebook book = new Ebook(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+                masterList.addBook(book);
+            } catch (RuntimeException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } else {
+            try {
+                Book book = new Book(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+                masterList.addBook(book);
+            } catch (RuntimeException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 

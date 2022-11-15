@@ -37,9 +37,4 @@ public class LoanTest{
         assertTrue(l2.getReturnStatus());
         assertTrue(l2.getIfLate());
     }
-
-    @Test
-    public void testLoanAlowed(){
-
-    }
 }

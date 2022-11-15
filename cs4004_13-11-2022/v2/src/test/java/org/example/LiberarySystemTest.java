@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,6 +101,19 @@ public class LiberarySystemTest{
         str = String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",b2.getUnavalibleUntil());
         assertEquals(str,sys.getBookOps(b2));
         assertEquals("1)Read ebook online. 2)Download ebook",sys.getBookOps(e1));
+    }
+
+    @Test
+    public void testProcessBook(){
+        LiberarySystem sys = new LiberarySystem();
+        sys.processNewBook("author, 01/02/2003, title, edition, publisher, a, b", true);
+        String str = "author, 01/02/2003, title, edition: edition, publisher, departments: a, b";
+        assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
+        assertThrows(RuntimeException.class, () -> sys.processNewBook("d,ee,gty,fdsfdsf", false));
+
+        sys.processNewBook("author, 01/02/0003, title, edition, publisher", false);
+        str = "author, 01/02/0003, title, edition: edition, publisher, departments: all";
+        assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
     }
 
 
