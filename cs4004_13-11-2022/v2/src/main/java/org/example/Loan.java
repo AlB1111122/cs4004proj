@@ -14,7 +14,7 @@ public class Loan{
     private LocalDate dueDate;
 
 
-    Loan(Book book, Person loanedTo)throws RuntimeException{
+    Loan(Book book, Person loanedTo){
         this.book = book;
         this.loanedTo = loanedTo;
         dateTaken = LocalDate.now();
