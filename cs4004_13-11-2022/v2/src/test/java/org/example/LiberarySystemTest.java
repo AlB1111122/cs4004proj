@@ -19,6 +19,8 @@ public class LiberarySystemTest{
     Book b3 = new Book("author","01/01/0001","title3","ed","pub","a, b");
     Book b4 = new Book("author","01/01/0001","title4","ed","pub","b, c");
 
+    Ebook e1 = new Ebook("author","01/01/0001","title4","ed","pub","a, b, c");
+
     @Test
     public void departmentBookLists(){
         LiberarySystem sys = new LiberarySystem();
@@ -82,6 +84,7 @@ public class LiberarySystemTest{
         sys.addBook(b2);
         sys.addBook(b3);
         sys.addBook(b4);
+        sys.addBook(e1);
 
         sys.getPerson("1");
         sys.signIn("password");
@@ -96,6 +99,7 @@ public class LiberarySystemTest{
         l1.returnBook();
         str = String.format("This book is unavailable for loan untill %1$td/%1$tm/%1$ty, 1)Reserve book.",b2.getUnavalibleUntil());
         assertEquals(str,sys.getBookOps(b2));
+        assertEquals("1)Read ebook online. 2)Download ebook",sys.getBookOps(e1));
     }
 
 

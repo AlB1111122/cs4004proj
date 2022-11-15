@@ -116,9 +116,6 @@ public class LiberarySystem{
     }
 
     public String getBookOps(Book book){//need to add ebook boolean
-        //if(book.isEbook()){
-        //   return "1)Read ebook online. 2)Download ebook";
-        //}
         boolean av = book.getAvailble();
         boolean depatmentCompatible = false;
         boolean userEligable = true;
@@ -137,6 +134,9 @@ public class LiberarySystem{
         }
         //returning parts
         if(depatmentCompatible){
+            if(book instanceof Ebook){
+                return "1)Read ebook online. 2)Download ebook";
+            }
             if(!userEligable){
                 return String.format("You must return %s,\n to take out another loan", signedIn.getLoans().get(signedIn.getLoans().size() - 1).getBook().getTitle());
             }

@@ -207,7 +207,6 @@ public class LiberaryMenu{
                 System.out.println("No relevant books found");
                 break;
             }
-            //need to add more serch terms
             searchResultsPage(results,sys);
         }
 
@@ -248,7 +247,10 @@ public class LiberaryMenu{
                     blocker = false;
                 }
                 if(bookOpSel.equals("1")){
-                    if(mode.contains("1)Loan book.")){
+                    if(selected instanceof Ebook){
+                        System.out.println("~~use your imagination for the books content, wow so educational~~~");
+                        break;
+                    }else if(mode.contains("1)Loan book.")){
                         sys.getSignedIn().addLoan(new Loan(selected,sys.getSignedIn()));
                         System.out.println("You now may take this book");
                         break;
@@ -259,13 +261,9 @@ public class LiberaryMenu{
                     }else{
                         break;
                     }
-                    //if(selected.isEbook()){
-                    //    System.out.println("~~wow use your imagination for the books content~~~");
-                    //}
-                }else if(bookOpSel.equals("2")){
-                    //if(selected.isEbook()){
-                    //     System.out.println("~~wow look how downloaded that book is~~~");
-                    // }
+                }else if(bookOpSel.equals("2") && selected instanceof Ebook){
+                    System.out.println("~~wow look how downloaded that book is~~~");
+                    break;
                 }else{
                     System.out.println("invalid input");
                     return;
@@ -331,6 +329,7 @@ public class LiberaryMenu{
         for(Loan l:sys.getSignedIn().getLoans()){
             System.out.println(l);
         }
+
         homePage(sys);
     }
 }
