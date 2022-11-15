@@ -16,14 +16,19 @@ public class LiberaryMenu{
         boolean more = true;
         while(more) {
             signInPage(sys);
-            homePage(sys);
         }
     }
     public void signInPage(LiberarySystem sys){
-        System.out.println("Please sign in to your UWON Library account, or press '0' to create a new account\nEnter ID:");
+        System.out.println("Please sign in to your UWON Library account, or press '0' to create a new account. 9)Exit\nEnter ID:");
         boolean blocker = true;
         while(blocker){
             String singInU = in.nextLine();
+            if(singInU.equals("9")){
+                System.exit(1);
+            }
+            if(singInU.equals("")){
+                return;
+            }
             if(singInU.equals("0")) {
                 //createNewUserPage(sys);
             }
@@ -39,6 +44,7 @@ public class LiberaryMenu{
                 System.out.println("That password is incorrect, please re-enter");
             }
         }
+        homePage(sys);
     }
 
     public void homePage(LiberarySystem sys){
@@ -47,12 +53,15 @@ public class LiberaryMenu{
         String menuMov = "";
         while(more) {
             while (blocker) {
-                System.out.print("1)Search for a book. 2)See staff. 3)See my loans");
+                System.out.print("1)Search for a book. 2)See staff. 3)See my loans. 9)Exit");
                 if (sys.getSignedIn().isStaff()) {
                     System.out.print(". 0)Open staff menu");
                 }
                 System.out.println("");
                 menuMov = in.nextLine();
+                if(menuMov.equals("9")){
+                    System.exit(1);
+                }
                 if (menuMov.equals("0") && sys.getSignedIn().isStaff()) {
                     //staffOnlyPage(sys);
                 }
@@ -64,6 +73,10 @@ public class LiberaryMenu{
             }
             if (menuMov.equals("1")) {
                 searchPage(sys);
+            }else if(menuMov.equals("2")){
+                staffPage(sys);
+            }else if(menuMov.equals("3")){
+                loanPage(sys);
             }
         }
     }
@@ -78,7 +91,6 @@ public class LiberaryMenu{
             while(blocker) {
                 System.out.println("0)Back to homepage. 1)Search books in my department. 2)Serch all books");
                 String input = in.nextLine();
-                results.clear();
                 if (input.equals("0")) {
                     homePage(sys);
                 }else if (input.equals("1")) {
@@ -122,6 +134,7 @@ public class LiberaryMenu{
                 for(Book b:removing){
                     results.remove(b);
                 }
+                removing.clear();
                 if(results.isEmpty()){
                     System.out.println("No relevant books found");
                     break;
@@ -138,6 +151,14 @@ public class LiberaryMenu{
                     }
                 }
             }
+            for(Book b:removing){
+                results.remove(b);
+            }
+            removing.clear();
+            if(results.isEmpty()){
+                System.out.println("No relevant books found");
+                break;
+            }
             System.out.println("Enter the books title: (if you enter nothing all titles will be included in results)");
             String inputTitle = in.nextLine();
             if(!inputTitle.equals("")) {
@@ -146,7 +167,34 @@ public class LiberaryMenu{
                     System.out.println("No relevant books found");
                     break;
                 }
-            }//need to add more serch terms
+            }
+            System.out.println("Enter the books Edition: (if you enter nothing all editions will be included in results)");
+            String inputEdition = in.nextLine();
+            if(!inputEdition.equals("")) {
+                results.removeIf(b -> !b.getEdition().toLowerCase().contains(inputEdition.toLowerCase()));
+                if(results.isEmpty()){
+                    System.out.println("No relevant books found");
+                    break;
+                }
+            }
+            System.out.println("Enter the a specific department to search within: (if you enter nothing all departments will be included in results)");
+            String inputDep = in.nextLine();
+            if(!inputDep.equals("")) {
+                for(Book b: results){
+                    if(!b.getDepartments().contains(inputDep)){
+                        removing.add(b);
+                    }
+                }
+            }
+            for(Book b:removing){
+                results.remove(b);
+            }
+            removing.clear();
+            if(results.isEmpty()){
+                System.out.println("No relevant books found");
+                break;
+            }
+            //need to add more serch terms
             searchResultsPage(results,sys);
         }
 
@@ -179,39 +227,96 @@ public class LiberaryMenu{
             }
             blocker = true;
             while(blocker) {
-                System.out.print(selected);
-                System.out.println( String.format("0)Return to results page. %s",sys.getBookOps(selected)));
+                System.out.println(selected);
+                System.out.printf("0)Return to results page. %s%n\n",sys.getBookOps(selected));
                 String bookOpSel = in.nextLine();
                 if(bookOpSel.equals("0")){
                     blocker = false;
                 }
                 if(bookOpSel.equals("1")){
                     if(!selected.getAvailble()){
-                        //sys.getSignedIn().addLoan(new Reservation(selected,sys.getSignedIn(),selected.getUnavalibleUntil()));
+                        sys.getSignedIn().addLoan(new Reservation(selected,sys.getSignedIn(),selected.getUnavalibleUntil()));
                     }else if(!(sys.getBookOps(selected).contains("You must return your outstanding on"))){
                         sys.getSignedIn().addLoan(new Loan(selected,sys.getSignedIn()));
-                        System.out.print("You now may take this book");
+                        System.out.println("You now may take this book");
                     }
                     //if(selected.isEbook()){
-                    //    System.out.print("~~wow use your imagination for the books content~~~");
+                    //    System.out.println("~~wow use your imagination for the books content~~~");
                     //}
                 }else if(bookOpSel.equals("2")){
                     //if(selected.isEbook()){
-                   //     System.out.print("~~wow look how downloaded that book is~~~");
+                   //     System.out.println("~~wow look how downloaded that book is~~~");
                    // }
-                }else{
+                }else if(bookOpSel.equals("0")){
+                    return;
+                } else{
                     System.out.println("invalid input");
-                    blocker = false;
+                    return;
                 }
             }
 
         }
-
-
     }
 
+    public void staffPage(LiberarySystem sys){
+        boolean more = true;
+        boolean blocker = true;
+        while(more) {
+            String input = "";
+            while (blocker) {
+                System.out.println("0)Return home. 1)Staff in my department. 2)Search by name. 3)Search by department");
+                 input = in.nextLine();
+                if (!input.equals("")) {
+                    blocker = false;
+                }
+            }
+            if(input.equals("0")){
+                homePage(sys);
+            }else if(input.equals("1")){
+                for(Person p:sys.getPeople()){
+                    for(String s:sys.getSignedIn().getDepartments()) {
+                        if (p.getDepartments().contains(s) && p.isStaff()) {
+                            System.out.println(p);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }else if(input.equals("2")){
+                System.out.println("Enter name or part of the name");
+                String nameSearch = in.nextLine();
+                for(Person p:sys.getPeople()){
+                    if (p.getName().contains(nameSearch) && p.isStaff()) {
+                        System.out.println(p);
+                        break;
+                    }
+                }
+                break;
+            }else if(input.equals("3")){
+                System.out.println("Enter the name of the department");
+                String depSearch = in.nextLine();
+                for(Person p:sys.getPeople()){
+                    for(String s:p.getDepartments()) {
+                        if (s.contains(depSearch) && p.isStaff()){
+                            System.out.println(p);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }else{
+                System.out.println("invalid input");
+                return;
+            }
+        }
+    }
 
-
+    public void loanPage(LiberarySystem sys){
+        for(Loan l:sys.getSignedIn().getLoans()){
+            System.out.println(l);
+        }
+        homePage(sys);
+    }
 }
 
 

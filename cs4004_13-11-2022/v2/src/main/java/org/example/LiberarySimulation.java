@@ -7,7 +7,7 @@ public class LiberarySimulation{
 
 
     static Person p1 = new Person(true, "Jeff Summers", "01@gmail.com", "Computer Science, Electronic & Computer Engineering", "jSum123", 1);
-    static Person p2 = new Person(true, "Anne Harlow", "02@gmail.com", "Computer Science, Electronic & Computer Engineering, Mathematics & Statistics", "jSum123", 1);
+    static Person p2 = new Person(true, "Anne Harlow", "02@gmail.com", "Computer Science, Electronic & Computer Engineering, Mathematics & Statistics", "jSum123", 2);
     static Person p3 = new Person(false, "Student one", "03@gmail.com", "Computer Science, Electronic & Computer Engineering", "password123", 3);
     static Person p4 = new Person(false, "Student two", "04@gmail.com", "History", "password123", 4);
 

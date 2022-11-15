@@ -15,9 +15,6 @@ public class Loan{
 
 
     Loan(Book book, Person loanedTo)throws RuntimeException{
-        if(!book.getAvailble()){
-            throw new RuntimeException("That book is already out on loan");//dosnt let u take out a book thats already out
-        }
         this.book = book;
         this.loanedTo = loanedTo;
         dateTaken = LocalDate.now();

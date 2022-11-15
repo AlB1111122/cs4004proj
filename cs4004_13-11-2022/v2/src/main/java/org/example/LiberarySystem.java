@@ -25,9 +25,6 @@ public class LiberarySystem{
     public ArrayList<Book> getBookList(String departments) {//changed bc the other was broken
         BookList ret = new BookList(departments);
         for (Book b : masterList.getBookList()) {
-            if (ret.getBookList().contains(b)) {
-                break;
-            }
             for (String s : b.getDepartments()) {
                if(ret.getDepartments().contains(s)){
                    ret.addBook(b);
@@ -111,7 +108,4 @@ public class LiberarySystem{
         }
         return "This book is not in your department";
     }
-
-
-
 }
