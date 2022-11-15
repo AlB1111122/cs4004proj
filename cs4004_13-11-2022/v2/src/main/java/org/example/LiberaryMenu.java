@@ -77,7 +77,7 @@ public class LiberaryMenu{
                     System.exit(1);
                 }
                 if (menuMov.equals("0") && sys.getSignedIn().isStaff()) {
-                    //staffOnlyPage(sys);
+                    staffOnlyPage(sys);
                 }else if (menuMov.equals("1")) {
                     searchPage(sys);
                 }else if(menuMov.equals("2")){
@@ -360,11 +360,14 @@ public class LiberaryMenu{
         }
         homePage(sys);
     }
+
+    public void staffOnlyPage(LiberarySystem sys){
+        boolean more = true;
+        boolean blocker = true;
+        while(more){
+            while(more){
+
+            }
+        }
+    }
 }
-
-
-//public void createNewUserPage(LiberarySystem sys){//this only lets you make student accounts staff accounts are added in the staff only page
-//System.out.println();
-//}
-
-
