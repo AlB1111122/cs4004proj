@@ -16,7 +16,7 @@ public class LiberarySimulation{
     static Book b3 = new Book("a2", "19/02/0003", "Essay Writing Guide", "2", "pub2");
     static Book b4 = new Book("a2", "01/05/1803", "Electrical engineering", "2", "pub2", "Electronic & Computer Engineering, Computer Science");
     static Book b5 = new Book("a2", "01/03/2013", "Caluclus", "2", "pub1", "Mathematics & Statistics");
-    static Book b6 = new Book("a2", "32/02/2004", "title5", "2", "pub2", "UL loan, Mathematics & Statistics");
+    static Book b6 = new Book("a2", "32/02/2004", "title5", "2", "pub2", "UL loan, History, Mathematics & Statistics");
 
     static Loan l1 = new Loan(b1,p3);
 

@@ -28,9 +28,6 @@ public class LiberarySystem{
     public ArrayList<Book> getBookList(String departments) {//changed bc the other was broken
         BookList ret = new BookList(departments);
         for (Book b : masterList.getBookList()) {
-            if (ret.getBookList().contains(b)) {
-                break;
-            }
             for (String s : b.getDepartments()) {
                if(ret.getDepartments().contains(s)){
                    ret.addBook(b);
@@ -148,7 +145,7 @@ public class LiberarySystem{
                 return "1)Read ebook online. 2)Download ebook";
             }
             if(!userEligable){
-                return String.format("You must return %s,\n to take out another loan", signedIn.getLoans().get(signedIn.getLoans().size() - 1).getBook().getTitle());
+                return String.format("You must return %s, to take out another loan", signedIn.getLoans().get(signedIn.getLoans().size() - 1).getBook().getTitle());
             }
             if(av){
                 return "1)Loan book.";

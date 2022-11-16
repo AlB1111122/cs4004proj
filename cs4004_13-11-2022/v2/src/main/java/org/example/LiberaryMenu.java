@@ -51,6 +51,7 @@ public class LiberaryMenu{
                 blocker = false;
             }catch (RuntimeException ex) {
                 System.out.println(ex.getMessage());
+                return;
                 //start the loop again insted of completly closing
             }
             System.out.println("Enter password:");
@@ -241,7 +242,7 @@ public class LiberaryMenu{
                 System.out.printf("0)Return to results page. %s\n",mode);
                 String bookOpSel = in.nextLine();
                 if(bookOpSel.equals("0")){
-                    blocker = false;
+                    return;
                 }
                 if(bookOpSel.equals("1")){
                     if(selected instanceof Ebook){
@@ -271,16 +272,10 @@ public class LiberaryMenu{
 
     public void listStaffPage(LiberarySystem sys){
         boolean more = true;
-        boolean blocker = true;
         while(more) {
             String input = "";
-            while (blocker) {
                 System.out.println("0)Return home. 1)Staff in my department. 2)Search by name. 3)Search by department");
                 input = in.nextLine();
-                if (!input.equals("")) {
-                    blocker = false;
-                }
-            }
             if(input.equals("0")){
                 homePage(sys);
             }else if(input.equals("1")){
@@ -292,7 +287,6 @@ public class LiberaryMenu{
                         }
                     }
                 }
-                break;
             }else if(input.equals("2")){
                 System.out.println("Enter name or part of the name");
                 String nameSearch = in.nextLine();
@@ -302,7 +296,6 @@ public class LiberaryMenu{
                         break;
                     }
                 }
-                break;
             }else if(input.equals("3")){
                 System.out.println("Enter the name of the department");
                 String depSearch = in.nextLine();
@@ -314,10 +307,9 @@ public class LiberaryMenu{
                         }
                     }
                 }
-                break;
             }else{
                 System.out.println("invalid input");
-                return;
+                break;
             }
         }
     }
