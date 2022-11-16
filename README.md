@@ -6,6 +6,9 @@ https://bitbucket.org/betacs4004/cs4004/src/main/
 jira:
 https://betacs4004.atlassian.net/jira/software/projects/CS4004BET/boards/1
 
+Test Design
+https://docs.google.com/document/d/1oJswSU0iI2PMnjFGmLsy4Zcr5mYL3Ei6EoPcitZG1uU/edit?usp=sharing
+
 general google doc:
 https://docs.google.com/document/d/1lcadF-_yyBLJxJSooe7MpaS6M5RLFPMe1pxesXLpolY/edit?usp=sharing
 
