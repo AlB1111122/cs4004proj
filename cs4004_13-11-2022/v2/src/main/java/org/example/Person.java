@@ -39,10 +39,6 @@ public class Person{
         loans.add(loan);
     }
 
-    public void removeLoan(Loan loan){
-        loans.remove(loan);
-    }
-
     public boolean isStaff(){
         return staff;
     }

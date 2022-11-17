@@ -94,7 +94,7 @@ public class LiberarySystemTest{
         Loan l1 = new Loan(b1,p1);
         Loan l2 = new Loan(b2,p2);
         sys.getSignedIn().addLoan(l1);
-        String str = String.format("You must return %s,\n to take out another loan",b1.getTitle());
+        String str = String.format("You must return %s, to take out another loan",b1.getTitle());
         assertEquals(str,sys.getBookOps(b1));
         assertEquals("This book is not in your department",sys.getBookOps(b4));
         l1.returnBook();

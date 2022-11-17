@@ -31,6 +31,7 @@ public class PersonTest{
         String str = String.format("Staff Member:\nID: 1, Name: %s, Email: %s, departments: a", name, email);
         assertEquals(p1.toString(), str);
         String str2 = String.format("Student:\nID: 2, Name: %s, Email: %s, departments: a", name, email);
+        assertEquals(str2,p2.toString());
     }
 
     @Test
@@ -44,5 +45,17 @@ public class PersonTest{
     @Test
     public void testThrowLoan(){
         assertThrows(RuntimeException.class, () -> p1.addLoan(l2));
+    }
+
+    @Test
+    public void gettersAndSetters(){
+        p1.setName("Jim P");
+        assertEquals("Jim P",p1.getName());
+
+        p1.setEmail("j@gmail.com");
+        assertEquals("j@gmail.com",p1.getEmail());
+
+        p1.addDepartments("b");
+        assertEquals("a, b",p1.getDepartmentString());
     }
 }

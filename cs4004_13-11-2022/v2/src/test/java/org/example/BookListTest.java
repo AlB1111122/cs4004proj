@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookListTest{
@@ -52,5 +53,14 @@ public class BookListTest{
         }
         String str2 = removedStr.toString();
         assertTrue(str2.matches(bl.toString()));
+    }
+
+    @Test
+    public void getDepatmentStrTest(){
+        String str = "a, b, c, z";
+        BookList testerWDep = new BookList(str);
+        BookList testerNoDep = new BookList();
+        assertEquals(str,testerWDep.getDepartmentString());
+        assertEquals("all",testerNoDep.getDepartmentString());
     }
 }

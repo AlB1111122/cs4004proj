@@ -41,11 +41,6 @@ public class BookList{
         books.remove(book);
     }
 
-    public void addDepartments(String dep){
-        String[] arr = dep.split(", ");
-        this.departments.addAll(Arrays.asList(arr));
-    }
-
     public String getDepartmentString(){
         StringBuilder str = new StringBuilder();
         if(departments.isEmpty()){
@@ -60,9 +55,5 @@ public class BookList{
 
     public ArrayList<String> getDepartments() {
         return departments;
-    }
-
-    public String infoString(){
-        return String.format("Departments: %s\n",getDepartmentString());
     }
 }

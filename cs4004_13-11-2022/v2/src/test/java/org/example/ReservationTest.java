@@ -16,11 +16,8 @@ public class ReservationTest {
 
     @Test
     public void testLoan() {
-
         String str = String.format("Loaned: %s: edition: %s, to: %s, removed on %tB %<te, %<tY, still out on loan"
                 ,b1.getTitle(),b1.getEdition(),p1.getName(),r1.getReservationDate());
-
-
     }
 
 
