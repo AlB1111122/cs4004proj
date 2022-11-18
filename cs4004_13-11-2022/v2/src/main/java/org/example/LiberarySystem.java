@@ -157,7 +157,7 @@ public class LiberarySystem{
         }
     }
 
-    public void processNewBook(String bookInfo, boolean ebook)throws RuntimeException {
+    public String processNewBook(String bookInfo, boolean ebook)throws RuntimeException {
         int i = 0;
         for (char c : bookInfo.toCharArray()) {
             if (Objects.equals(c, ',')) {
@@ -174,15 +174,17 @@ public class LiberarySystem{
                 try {
                     Ebook book = new Ebook(arr[0], arr[1], arr[2], arr[3], arr[4]);
                     masterList.addBook(book);
+                    return "Book added";
                 } catch (RuntimeException ex) {
-                    System.out.println(ex.getMessage());
+                    return ex.getMessage();
                 }
             } else {
                 try {
                     Book book = new Book(arr[0], arr[1], arr[2], arr[3], arr[4]);
                     masterList.addBook(book);
+                    return "Book added";
                 } catch (RuntimeException ex) {
-                    System.out.println(ex.getMessage());
+                    return ex.getMessage();
                 }
             }
         }
@@ -192,15 +194,17 @@ public class LiberarySystem{
             try {
                 Ebook book = new Ebook(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
                 masterList.addBook(book);
+                return "Book added";
             } catch (RuntimeException ex) {
-                System.out.println(ex.getMessage());
+                return ex.getMessage();
             }
         } else {
             try {
                 Book book = new Book(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
                 masterList.addBook(book);
+                return "Book added";
             } catch (RuntimeException ex) {
-                System.out.println(ex.getMessage());
+                return ex.getMessage();
             }
         }
     }

@@ -104,7 +104,7 @@ public class Book{
         return str.toString();//string just for departments cuz its awkward
     }
 
-    private void checkDateCorrect(String date){
+    private void checkDateCorrect(String date)throws RuntimeException{
         if(date.matches("[a-zA-Z]") || !date.matches(".*[0-9].*")){
             throw new RuntimeException("not a valid date");
         }

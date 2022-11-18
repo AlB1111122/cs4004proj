@@ -22,6 +22,9 @@ public class PersonTest{
     @Test
     public void testPerson() {
 
+        assertTrue(p1.isStaff());
+        assertFalse(p2.isStaff());
+
         goalLoans.add(l1);
 
         p1.addLoan(l1);
@@ -51,9 +54,6 @@ public class PersonTest{
     public void gettersAndSetters(){
         p1.setName("Jim P");
         assertEquals("Jim P",p1.getName());
-
-        p1.setEmail("j@gmail.com");
-        assertEquals("j@gmail.com",p1.getEmail());
 
         p1.addDepartments("b");
         assertEquals("a, b",p1.getDepartmentString());

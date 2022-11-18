@@ -369,9 +369,9 @@ public class LiberaryMenu{
                     System.out.println("Is this book an Ebook? Y/N");
                     String ebook = in.nextLine();
                     if(ebook.equalsIgnoreCase("Y")){
-                        sys.processNewBook(bookInfo,true);
+                        System.out.println(sys.processNewBook(bookInfo,true));
                     }else if(ebook.equalsIgnoreCase("N")){
-                        sys.processNewBook(bookInfo,false);
+                        System.out.println(sys.processNewBook(bookInfo,false));
                     }else{
                         System.out.println("invalid input");
                         break;

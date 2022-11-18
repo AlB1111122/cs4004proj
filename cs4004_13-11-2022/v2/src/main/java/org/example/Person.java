@@ -43,10 +43,6 @@ public class Person{
         return staff;
     }
 
-    public void setStaff(boolean newb){
-        staff = newb;
-    }
-
     public String getName(){
         return name;
     }
@@ -57,13 +53,6 @@ public class Person{
 
     public String getEmail(){
         return email;
-    }
-
-    public void setEmail(String email){
-        if(!email.contains("@") || !email.contains(".") || !email.matches(".*[a-zA-Z].*")){
-            throw new RuntimeException("Cannot add this email. That's not an email");
-        }
-        this.email = email;
     }
 
     public ArrayList<Loan> getLoans(){
@@ -89,9 +78,6 @@ public class Person{
 
     public String getDepartmentString(){
         StringBuilder str = new StringBuilder();
-        if(departments.isEmpty()){
-            return "all";
-        }
         for(String s:departments){
             str.append(s).append(", ");
         }

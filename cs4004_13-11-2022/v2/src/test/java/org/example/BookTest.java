@@ -26,10 +26,12 @@ public class BookTest{
         a.setTitle(title);
         a.setEdition(edition);
         a.setPublisher(publisher);
-        String str2 = String.format("%s, %s, %s, edition: %s, %s",author,releaseDate,title,edition,publisher);
-        String str3 = String.format("%s, %s, %s, edition: %s, %s"
-                ,a.getAuthor(),a.getReleaseDate(),a.getTitle(),a.getEdition(),a.getPublisher());
-        assertTrue(str3.matches(str2));
+
+        assertEquals(author,a.getAuthor());
+        assertEquals(releaseDate,a.getReleaseDate());
+        assertEquals(title,a.getTitle());
+        assertEquals(edition,a.getEdition());
+        assertEquals(publisher,a.getPublisher());
     }
 
     @Test
@@ -63,5 +65,6 @@ public class BookTest{
         assertThrows(RuntimeException.class, () -> new Book("a","34324453","book","ed","pub"));
         assertThrows(RuntimeException.class, () -> new Book("a","12/425","book","ed","pub"));
         assertThrows(RuntimeException.class, () -> new Book("a","12/4/25","book","ed","pub"));
+        assertThrows(RuntimeException.class, () -> new Book("a","12//25","book","ed","pub"));
     }
 }

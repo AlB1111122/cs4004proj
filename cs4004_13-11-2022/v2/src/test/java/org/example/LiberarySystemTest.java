@@ -67,12 +67,18 @@ public class LiberarySystemTest{
         assertEquals(1,sys.dateHander("20/06/2022","20/06/2021"));
         assertEquals(1,sys.dateHander("20/06/2022","01/05/2022"));
         assertEquals(1,sys.dateHander("20/06/2022","19/06/2022"));
-
         assertEquals(1,sys.dateHander("20/06/2022","20/06/2022"));
 
         assertEquals(0,sys.dateHander("20/06/2022","20/06/2023"));
         assertEquals(0,sys.dateHander("20/06/2022","20/07/2022"));
         assertEquals(0,sys.dateHander("20/06/2022","21/06/2022"));
+
+        assertEquals(-1,sys.dateHander("jfivwv","20/06/2023"));
+        assertEquals(-1,sys.dateHander("123/03/2022","20/06/2023"));
+        assertEquals(-1,sys.dateHander("12/03/202312","20/06/2023"));
+        assertEquals(-1,sys.dateHander("123/fd/2022","20/06/2023"));
+        assertEquals(-1,sys.dateHander("123/212022","20/06/2023"));
+        assertEquals(-1,sys.dateHander("123/2//12022","20/06/2023"));
     }
 
     @Test
@@ -109,8 +115,20 @@ public class LiberarySystemTest{
         sys.processNewBook("author, 01/02/2003, title, edition, publisher, a, b", true);
         String str = "author, 01/02/2003, title, edition: edition, publisher, departments: a, b";
         assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
+        sys.processNewBook("author, 01/02/2003, title, edition, publisher", true);
+        str = "author, 01/02/2003, title, edition: edition, publisher, departments: all";
+        assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
+
+        sys.processNewBook("author, 01/02/2003, title, edition, publisher, a, b", false);
+        str = "author, 01/02/2003, title, edition: edition, publisher, departments: a, b";
+        assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
         assertThrows(RuntimeException.class, () -> sys.processNewBook("d,ee,gty,fdsfdsf", false));
 
+        assertEquals("not a valid date",sys.processNewBook("author, 01//2003, title, edition, publisher, a, b", false));
+        assertEquals("not a valid date",sys.processNewBook("author, 01//2003, title, edition, publisher, a, b", true));
+        assertEquals("not a valid date",sys.processNewBook("author, 01//2003, title, edition, publisher", false));
+        assertEquals("not a valid date",sys.processNewBook("author, 01//2003, title, edition, publisher", true));
+        assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
         sys.processNewBook("author, 01/02/0003, title, edition, publisher", false);
         str = "author, 01/02/0003, title, edition: edition, publisher, departments: all";
         assertEquals(str,sys.getBookList().get(sys.getBookList().size() - 1).toString());
